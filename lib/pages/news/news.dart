@@ -14,7 +14,10 @@ class NewsPage extends StatelessWidget {
         appBar: AppBar(
           backgroundColor: Colors.white,
           elevation: 0,
+          // title widget两边不留间隙
+          titleSpacing: 0,
           title: Container(
+            padding: EdgeInsets.only(left: 15),
             child: Row(
               children: [
                 Image.asset('assets/news_logo.png', height: 25, width: 50),
