@@ -103,6 +103,7 @@ class LapinProduct {
   final double realPrice; // 原价
   double discountRate; // 折扣率 0~1
   final int salesVolume; // 月销量
+  final String createTime; // 创建时间
 
   LapinProduct.fromJson(json)
       : productId = json['productid'],
@@ -113,5 +114,6 @@ class LapinProduct {
         quanPrice = json['QuanPrice'].toDouble(),
         realPrice = json['RealPrice'].toDouble(),
         discountRate = json['DiscountRate'].toDouble(),
-        salesVolume = json['SalesVolume'];
+        salesVolume = json['SalesVolume'],
+        createTime = json['CreateTime'];
 }

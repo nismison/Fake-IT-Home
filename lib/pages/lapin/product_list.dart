@@ -1,3 +1,4 @@
+import 'package:fake_it_home/pages/lapin/coupons_item.dart';
 import 'package:fake_it_home/pages/lapin/no_more.dart';
 
 import '../../main.dart';
@@ -31,6 +32,7 @@ class ProductList extends GetView<LapinController> {
                       : const LoadingTile();
                 }
 
+                if (_code == '福利') return CouponsItem(_productList[index]);
                 return ProductItem(_productList[index]);
               },
             ),
