@@ -113,7 +113,9 @@ class Rank extends GetView<LapinController> {
                   ),
                 ),
                 CupertinoButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Get.find<LapinController>().tabController.index = 1;
+                  },
                   pressedOpacity: 0.6,
                   padding: EdgeInsets.zero,
                   child: Row(

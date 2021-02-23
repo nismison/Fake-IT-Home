@@ -8,6 +8,7 @@ class LapinController extends GetxController {
   final productList = <List<LapinProduct>>[].obs; // 普通商品列表
   final loading = true.obs;
   final noMore = false.obs;
+  TabController tabController;
 
   int productPage = 1;
 
