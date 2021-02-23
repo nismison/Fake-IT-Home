@@ -1,0 +1,40 @@
+import 'package:fake_it_home/pages/lapin/no_more.dart';
+
+import '../../main.dart';
+import 'controller.dart';
+import 'loading_tile.dart';
+import 'product_item.dart';
+
+class ProductList extends GetView<LapinController> {
+  final String _code;
+  final int _index;
+
+  const ProductList(this._code, this._index);
+
+  @override
+  Widget build(BuildContext context) {
+    controller.fetchProductList(_code, 1);
+    return GetBuilder<LapinController>(
+        id: 'lapin',
+        builder: (_) {
+          final _productList = controller.productList[_index];
+
+          return Scrollbar(
+            child: ListView.builder(
+              physics: const ClampingScrollPhysics(), // 关闭滚动时回弹效果
+              itemCount: _productList.length + 1,
+              itemBuilder: (_, index) {
+                if (index == _productList.length) {
+                  controller.fetchProductList(_code);
+                  return controller.noMore()
+                      ? const NoMore()
+                      : const LoadingTile();
+                }
+
+                return ProductItem(_productList[index]);
+              },
+            ),
+          );
+        });
+  }
+}

@@ -1,6 +1,7 @@
 import '../../main.dart';
 import 'all.dart';
 import 'controller.dart';
+import 'product_list.dart';
 
 class LapinPage extends StatelessWidget {
   @override
@@ -65,11 +66,11 @@ class LapinPage extends StatelessWidget {
           ],
         ),
         body: TabBarView(
-          children: lapinTabs.map((it) {
-            if (it['code'] == 'all') {
+          children: lapinTabs.asMap().keys.map((index) {
+            if (lapinTabs[index]['code'] == 'all') {
               return const LapinAllList();
             }
-            return const Center(child: Text('123'));
+            return ProductList(lapinTabs[index]['code'], index);
           }).toList(),
         ),
       ),

@@ -109,18 +109,18 @@ final List<Map> lapinTabs = [
   },
   {
     'title': '辣榜',
-    'code': '',
+    'code': '爆品',
   },
   {
     'title': '1元包邮',
-    'code': '',
+    'code': '1元',
   },
   {
     'title': '9块9',
-    'code': '',
+    'code': '9kuai9',
   },
   {
     'title': '福包',
-    'code': '',
+    'code': '福利',
   },
 ];

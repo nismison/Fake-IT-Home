@@ -29,7 +29,7 @@ class NetImageCache extends StatelessWidget {
               return Container(
                 width: width,
                 height: height,
-                padding: EdgeInsets.symmetric(horizontal: width / 3),
+                padding: EdgeInsets.symmetric(horizontal: width / 2),
                 color: const Color(0xffE8EAE9),
                 child: Opacity(
                   opacity: 0.6,

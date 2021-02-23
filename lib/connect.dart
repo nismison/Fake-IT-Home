@@ -119,6 +119,15 @@ class Connect extends GetConnect {
         .map<LapinProduct>((it) => LapinProduct.fromJson(it))
         .toList();
   }
+
+  /// 辣品商品列表
+  Future<List<LapinProduct>> fetchLapinProductList(String tag, int page) async {
+    final res = await _request(
+        'https://api.lapin365.com/api/apps/tag?pagenumber=$page&tag=$tag');
+    return res['content']
+        .map<LapinProduct>((it) => LapinProduct.fromJson(it))
+        .toList();
+  }
 }
 
 class RequestException implements Exception {
