@@ -13,6 +13,7 @@ class NewsListContainer extends StatefulWidget {
 
 class _NewsListContainerState extends State<NewsListContainer> {
   List<News> newsList = [];
+  List<NewsBanner> banners;
   bool loading = true;
   String _code;
   final ScrollController _scrollController = ScrollController();
@@ -27,15 +28,23 @@ class _NewsListContainerState extends State<NewsListContainer> {
   /// 初始化数据
   void init() async {
     List<News> news;
+    List<NewsBanner> _banners;
 
+    /// 获取列表数据
     if (_code == 'rank') {
       news = await Get.find<Connect>().fetchRankList();
     } else {
       news = await Get.find<Connect>().fetchNews(_code);
     }
 
+    /// 获取轮播图
+    if (_code == 'news') {
+      _banners = await Get.find<Connect>().fetchNewsBanner();
+    }
+
     setState(() {
       newsList = news;
+      banners = _banners;
       loading = false;
     });
   }
@@ -56,6 +65,7 @@ class _NewsListContainerState extends State<NewsListContainer> {
     return Column(
       children: [
         _code == 'rank' ? RankTabs(scrollTo) : const SizedBox(),
+        _code == 'news' ? BannerSwiper(banners) : const SizedBox(),
         Expanded(
           child: ListView.builder(
             controller: _scrollController,
@@ -156,6 +166,55 @@ class RankTab extends StatelessWidget {
             ),
           ),
         ),
+      ),
+    );
+  }
+}
+
+/// 轮播图
+class BannerSwiper extends StatelessWidget {
+  final List<NewsBanner> banners;
+
+  const BannerSwiper(this.banners);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 150,
+      margin: EdgeInsets.symmetric(vertical: 10),
+      child: Swiper(
+        itemBuilder: (BuildContext context, int index) {
+          return Padding(
+            padding: EdgeInsets.symmetric(horizontal: 15),
+            child: NetImageCache(banners[index].image),
+          );
+        },
+        itemCount: banners.length,
+        autoplay: true,
+        autoplayDelay: 5000,
+        pagination: SwiperCustomPagination(builder: (_, config) {
+          return Align(
+            alignment: Alignment(0, 0.85),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: banners
+                  .asMap()
+                  .keys
+                  .map((index) => Container(
+                        width: index == config.activeIndex ? 16 : 8,
+                        height: 8,
+                        margin: EdgeInsets.symmetric(horizontal: 5),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(4),
+                          color: index == config.activeIndex
+                              ? Color(0xffC0372D)
+                              : Colors.white,
+                        ),
+                      ))
+                  .toList(),
+            ),
+          );
+        }),
       ),
     );
   }
