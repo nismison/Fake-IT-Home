@@ -17,7 +17,7 @@ class NewsPage extends StatelessWidget {
           // title widget两边不留间隙
           titleSpacing: 0,
           title: Container(
-            padding: EdgeInsets.only(left: 15),
+            padding: const EdgeInsets.only(left: 15),
             child: Row(
               children: [
                 Image.asset('assets/news_logo.png', height: 25, width: 50),

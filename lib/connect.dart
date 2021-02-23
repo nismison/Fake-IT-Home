@@ -11,15 +11,15 @@ class Connect extends GetConnect {
     Response response;
     try {
       if (method == 'POST') {
-        print('request: $baseUrl$path ${jsonEncode(body)}');
+        print('request: $path ${jsonEncode(body)}');
         headers['content-type'] = 'application/json';
         response = await post(path, body, headers: headers);
       } else if (method == 'GET') {
-        print('request: $baseUrl$path ${jsonEncode(body)}');
+        print('request: $path ${jsonEncode(body)}');
         headers['content-type'] = 'application/json';
         response = await get(path, headers: headers);
       } else {
-        print('request: $baseUrl$path $body');
+        print('request: $path $body');
         response = await post(path, body, headers: headers);
       }
     } on Exception catch (e) {
@@ -28,12 +28,15 @@ class Connect extends GetConnect {
     }
 
     if (response.statusCode != 200) {
-      toast(response.body['error']);
-      throw RequestException(response.statusCode, response.body['error']);
+      // toast(response.body['error']);
+      toast(response.statusCode.toString());
+      // throw RequestException(response.statusCode, response.body['error']);
+      throw RequestException(
+          response.statusCode, response.statusCode.toString());
     }
 
     final json = jsonDecode(response.bodyString);
-    print('response: $baseUrl$path $json');
+    print('response: $path $json');
 
     return json;
 
@@ -49,8 +52,7 @@ class Connect extends GetConnect {
 
   /// 获取最新列表
   Future<List<News>> fetchNews(String code) async {
-    baseUrl = 'https://api.ithome.com';
-    final res = await _request('/json/newslist/$code');
+    final res = await _request('https://api.ithome.com/json/newslist/$code');
 
     if (code == 'news') {
       for (var item in res['toplist']) {
@@ -66,16 +68,15 @@ class Connect extends GetConnect {
 
   /// 获取新闻轮播图
   Future<List<NewsBanner>> fetchNewsBanner() async {
-    baseUrl = 'https://api.ithome.com';
-    final res = await _request('/json/slide/index');
+    final res = await _request('https://api.ithome.com/json/slide/index');
     return res.map<NewsBanner>((it) => NewsBanner.fromJson(it)).toList();
   }
 
   /// 获取热评列表
   /// TODO: 不懂为什么获取不到数据，特么的
   Future<List<HotComment>> fetchHotCommentList() async {
-    baseUrl = 'https://cmt.ithome.com';
-    final res = await _request('/api/comment/hotcommentlist');
+    final res =
+        await _request('https://cmt.ithome.com/api/comment/hotcommentlist');
     return res['content']['commentlist']
         .map<HotComment>((it) => HotComment.fromJson(it))
         .toList();
@@ -83,8 +84,7 @@ class Connect extends GetConnect {
 
   /// 获取热榜列表
   Future<List<News>> fetchRankList() async {
-    baseUrl = 'https://api.ithome.com';
-    final res = await _request('/json/newslist/rank');
+    final res = await _request('https://api.ithome.com/json/newslist/rank');
     final list = [
       ...res['channel48rank'],
       ...res['channelweekhotrank'],
@@ -92,6 +92,32 @@ class Connect extends GetConnect {
       ...res['channelmonthrank'],
     ];
     return list.map<News>((it) => News.fromJson(it)).toList();
+  }
+
+  /// 辣品轮播图
+  Future<List<LapinBanner>> fetchLapinBanners() async {
+    final res = await _request('https://api.lapin365.com/api/apps/focus');
+    return res['content']
+        .map<LapinBanner>((it) => LapinBanner.fromJson(it))
+        .toList();
+  }
+
+  /// 辣榜
+  Future<List<LapinProduct>> fetchLapinRanks([int page = 1]) async {
+    final res = await _request(
+        'https://api.lapin365.com/api/apps/tag?tag=爆品&pagenumber=$page');
+    return res['content']
+        .map<LapinProduct>((it) => LapinProduct.fromJson(it))
+        .toList();
+  }
+
+  /// 全部列表
+  Future<List<LapinProduct>> fetchLapinAllList([int productId = 0]) async {
+    final res = await _request(
+        'https://api.lapin365.com/api/apps/indexlistsegbyid?productid=$productId');
+    return res['content']
+        .map<LapinProduct>((it) => LapinProduct.fromJson(it))
+        .toList();
   }
 }
 

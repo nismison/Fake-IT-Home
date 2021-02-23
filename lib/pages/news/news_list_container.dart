@@ -181,11 +181,11 @@ class BannerSwiper extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: 150,
-      margin: EdgeInsets.symmetric(vertical: 10),
+      margin: const EdgeInsets.symmetric(vertical: 10),
       child: Swiper(
-        itemBuilder: (BuildContext context, int index) {
+        itemBuilder: (context, index) {
           return Padding(
-            padding: EdgeInsets.symmetric(horizontal: 15),
+            padding: const EdgeInsets.symmetric(horizontal: 15),
             child: NetImageCache(banners[index].image),
           );
         },
@@ -194,7 +194,7 @@ class BannerSwiper extends StatelessWidget {
         autoplayDelay: 5000,
         pagination: SwiperCustomPagination(builder: (_, config) {
           return Align(
-            alignment: Alignment(0, 0.85),
+            alignment: const Alignment(0, 0.85),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: banners
@@ -203,11 +203,11 @@ class BannerSwiper extends StatelessWidget {
                   .map((index) => Container(
                         width: index == config.activeIndex ? 16 : 8,
                         height: 8,
-                        margin: EdgeInsets.symmetric(horizontal: 5),
+                        margin: const EdgeInsets.symmetric(horizontal: 5),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(4),
                           color: index == config.activeIndex
-                              ? Color(0xffC0372D)
+                              ? const Color(0xffC0372D)
                               : Colors.white,
                         ),
                       ))

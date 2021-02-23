@@ -42,7 +42,7 @@ class CommentItem extends StatelessWidget {
     return Container(
       child: Row(
         children: [
-          CircleAvatar(
+          const CircleAvatar(
             child: Text('1', style: TextStyle(
               color: Colors.white,
               fontSize: 12,

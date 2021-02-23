@@ -83,3 +83,35 @@ class HotCommentComment {
         likeCount = json['S'],
         postTime = json['T'];
 }
+
+/// 辣品 - banner
+class LapinBanner {
+  final String picture;
+
+  LapinBanner.fromJson(json)
+      : picture = 'https://img.lapin365.com${json['Picture']}';
+}
+
+/// 辣品 - 商品信息
+class LapinProduct {
+  final int productId;
+  final String productName;
+  final String picture;
+  final String originStoreName;
+  final double proPrice; // 券后价
+  final double quanPrice; // 优惠券面额
+  final double realPrice; // 原价
+  double discountRate; // 折扣率 0~1
+  final int salesVolume; // 月销量
+
+  LapinProduct.fromJson(json)
+      : productId = json['productid'],
+        productName = json['ProductName'],
+        picture = json['Picture'],
+        originStoreName = json['OriginStoreName'],
+        proPrice = json['ProPrice'].toDouble(),
+        quanPrice = json['QuanPrice'].toDouble(),
+        realPrice = json['RealPrice'].toDouble(),
+        discountRate = json['DiscountRate'].toDouble(),
+        salesVolume = json['SalesVolume'];
+}

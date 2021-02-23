@@ -3,8 +3,6 @@ import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'main.dart';
 
-final _connect = Get.find<Connect>();
-
 void toast(String message) {
   if (Platform.isAndroid || Platform.isIOS) {
     Fluttertoast.showToast(
@@ -20,6 +18,18 @@ Future<void> hideKeyboard() {
   return SystemChannels.textInput.invokeMethod('TextInput.hide');
 }
 
+extension Double2Fixed on double {
+  /// 去除小数点后多余的 0
+  String fixed() {
+    var i = truncate();
+    if (this == i) {
+      return i.toString();
+    }
+    return toString();
+  }
+}
+
+/// 资讯首页tab
 final List<Map> homeTabs = [
   {
     'title': '最新',
@@ -88,5 +98,29 @@ final List<Map> homeTabs = [
   {
     'title': '京东精选',
     'code': 'jd',
+  },
+];
+
+/// 辣品首页tab
+final List<Map> lapinTabs = [
+  {
+    'title': '全部',
+    'code': 'all',
+  },
+  {
+    'title': '辣榜',
+    'code': '',
+  },
+  {
+    'title': '1元包邮',
+    'code': '',
+  },
+  {
+    'title': '9块9',
+    'code': '',
+  },
+  {
+    'title': '福包',
+    'code': '',
   },
 ];

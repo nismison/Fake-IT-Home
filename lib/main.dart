@@ -7,6 +7,7 @@ import 'home.dart';
 export 'dart:convert';
 
 export 'package:cached_network_image/cached_network_image.dart';
+export 'package:decimal/decimal.dart';
 export 'package:flutter/material.dart';
 export 'package:flutter_swiper/flutter_swiper.dart';
 export 'package:get/get.dart';
