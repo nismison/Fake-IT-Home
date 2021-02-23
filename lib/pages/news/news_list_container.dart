@@ -65,13 +65,13 @@ class _NewsListContainerState extends State<NewsListContainer> {
     return Column(
       children: [
         _code == 'rank' ? RankTabs(scrollTo) : const SizedBox(),
-        _code == 'news' ? BannerSwiper(banners) : const SizedBox(),
         Expanded(
           child: ListView.builder(
             controller: _scrollController,
-            itemCount: newsList.length,
+            itemCount: _code == 'news' ? newsList.length + 1 : newsList.length,
             itemBuilder: (context, index) {
               if (_code == 'rank') return NewsItem(newsList[index]);
+              if (_code == 'news' && index == 0) return BannerSwiper(banners);
 
               return newsList[index].imageList.isEmpty
                   ? NewsItem(newsList[index])
