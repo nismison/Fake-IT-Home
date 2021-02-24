@@ -1,8 +1,6 @@
-import 'package:fake_it_home/pages/lapin/coupons_item.dart';
-import 'package:fake_it_home/pages/lapin/no_more.dart';
-
 import '../../main.dart';
 import 'controller.dart';
+import 'coupons_item.dart';
 import 'loading_tile.dart';
 import 'product_item.dart';
 

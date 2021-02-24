@@ -66,18 +66,25 @@ class _NewsListContainerState extends State<NewsListContainer> {
       children: [
         _code == 'rank' ? RankTabs(scrollTo) : const SizedBox(),
         Expanded(
-          child: ListView.builder(
-            controller: _scrollController,
-            itemCount: _code == 'news' ? newsList.length + 1 : newsList.length,
-            itemBuilder: (context, index) {
-              if (_code == 'rank') return NewsItem(newsList[index]);
-              if (_code == 'news' && index == 0) return BannerSwiper(banners);
+          child: Scrollbar(
+            child: ListView.builder(
+              controller: _scrollController,
+              itemCount: newsList.length + (_code == 'news' ? 2 : 1),
+              itemBuilder: (context, index) {
+                if ((_code == 'news' && index == newsList.length + 1) ||
+                    (_code != 'news' && index == newsList.length)) {
+                  return const NoMore();
+                }
 
-              final _news = newsList[_code == 'news' ? index - 1 : index];
-              return _news.imageList.isEmpty
-                  ? NewsItem(_news)
-                  : NewsItemMultiple(_news);
-            },
+                if (_code == 'rank') return NewsItem(newsList[index]);
+                if (_code == 'news' && index == 0) return BannerSwiper(banners);
+
+                final _news = newsList[_code == 'news' ? index - 1 : index];
+                return _news.imageList.isEmpty
+                    ? NewsItem(_news)
+                    : NewsItemMultiple(_news);
+              },
+            ),
           ),
         ),
       ],

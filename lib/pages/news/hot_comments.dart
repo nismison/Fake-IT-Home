@@ -1,4 +1,3 @@
-import 'package:fake_it_home/pages/lapin/no_more.dart';
 import 'package:flutter/cupertino.dart';
 
 import '../../main.dart';
@@ -29,13 +28,15 @@ class _HotCommentsListState extends State<HotCommentsList> {
   Widget build(BuildContext context) {
     if (loading) return const Loading();
 
-    return ListView.builder(
-      itemCount: _hotComments.length + 1,
-      itemBuilder: (context, index) {
-        if (index == _hotComments.length) return const NoMore();
+    return Scrollbar(
+      child: ListView.builder(
+        itemCount: _hotComments.length + 1,
+        itemBuilder: (context, index) {
+          if (index == _hotComments.length) return const NoMore();
 
-        return CommentItem(_hotComments[index], index: index);
-      },
+          return CommentItem(_hotComments[index], index: index);
+        },
+      ),
     );
   }
 }
