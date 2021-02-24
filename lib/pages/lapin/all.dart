@@ -55,7 +55,10 @@ class BannerSwiper extends GetView<LapinController> {
         itemBuilder: (_, index) {
           return Padding(
             padding: const EdgeInsets.symmetric(horizontal: 15),
-            child: NetImageCache(controller.banners[index].picture),
+            child: NetImageCache(
+              controller.banners[index].picture,
+              placeholderPath: 'assets/banner_placeholder.png',
+            ),
           );
         },
         itemCount: controller.banners.length,

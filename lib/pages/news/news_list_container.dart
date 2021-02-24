@@ -186,7 +186,10 @@ class BannerSwiper extends StatelessWidget {
         itemBuilder: (context, index) {
           return Padding(
             padding: const EdgeInsets.symmetric(horizontal: 15),
-            child: NetImageCache(banners[index].image),
+            child: NetImageCache(
+              banners[index].image,
+              placeholderPath: 'assets/banner_placeholder.png',
+            ),
           );
         },
         itemCount: banners.length,
