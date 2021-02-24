@@ -11,6 +11,7 @@ export 'package:decimal/decimal.dart';
 export 'package:flutter/material.dart';
 export 'package:flutter_swiper/flutter_swiper.dart';
 export 'package:get/get.dart';
+export 'package:shimmer/shimmer.dart';
 
 export 'connect.dart';
 export 'pages/pages.dart';

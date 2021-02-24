@@ -128,6 +128,13 @@ class Connect extends GetConnect {
         .map<LapinProduct>((it) => LapinProduct.fromJson(it))
         .toList();
   }
+
+  /// 获取文章内容
+  Future<NewsDetail> fetchNewsContent(int newsId) async {
+    final res =
+        await _request('https://api.ithome.com/json/newscontent/$newsId');
+    return NewsDetail.fromJson(res);
+  }
 }
 
 class RequestException implements Exception {

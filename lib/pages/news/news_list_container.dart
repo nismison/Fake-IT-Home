@@ -73,9 +73,10 @@ class _NewsListContainerState extends State<NewsListContainer> {
               if (_code == 'rank') return NewsItem(newsList[index]);
               if (_code == 'news' && index == 0) return BannerSwiper(banners);
 
-              return newsList[index].imageList.isEmpty
-                  ? NewsItem(newsList[index])
-                  : NewsItemMultiple(newsList[index]);
+              final _news = newsList[_code == 'news' ? index - 1 : index];
+              return _news.imageList.isEmpty
+                  ? NewsItem(_news)
+                  : NewsItemMultiple(_news);
             },
           ),
         ),

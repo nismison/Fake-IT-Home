@@ -121,3 +121,37 @@ class LapinProduct {
         salesVolume = json['SalesVolume'],
         createTime = json['CreateTime'];
 }
+
+/// 文章内容
+class NewsDetail {
+  final String newsSource;
+  final String newsAuthor;
+  final String keyword;
+  final String detail;
+  final String editor; // 责任编辑
+  final ItAccountInfo accountInfo;
+
+  NewsDetail.fromJson(json)
+      : newsSource = json['newssource'],
+        newsAuthor = json['newsauthor'],
+        keyword = json['keyword'],
+        detail = json['detail'],
+        editor = json['z'],
+        accountInfo = json['itaccount'] != null
+            ? ItAccountInfo.fromJson(json['itaccount'])
+            : null;
+}
+
+/// IT号信息
+class ItAccountInfo {
+  final int id;
+  final int accountId;
+  final String accountName;
+  final String avatarUrl;
+
+  ItAccountInfo.fromJson(json)
+      : id = json['id'],
+        accountId = json['accountid'],
+        accountName = json['accountname'],
+        avatarUrl = json['avatarurl'];
+}

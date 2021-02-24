@@ -34,6 +34,8 @@ dependencies:
   flutter_swiper:
   cached_network_image:
   decimal:
+  flutter_html:
+  shimmer:
 
 dev_dependencies:
   flutter_test:

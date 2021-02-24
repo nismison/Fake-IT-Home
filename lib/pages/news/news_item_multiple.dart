@@ -1,4 +1,5 @@
 import '../../main.dart';
+import '../news_detail/controller.dart';
 import 'news_tag.dart';
 
 class NewsItemMultiple extends StatelessWidget {
@@ -16,7 +17,12 @@ class NewsItemMultiple extends StatelessWidget {
     if (_news.original) _tags.add(const NewsTag('原创'));
 
     return InkWell(
-      onTap: () {},
+      onTap: () {
+        final _detailController = Get.find<NewsDetailController>();
+        _detailController.newsInfo = _news;
+        _detailController.fetchNewsDetail();
+        Get.to(() => NewsDetailPage());
+      },
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 7),
         child: Column(

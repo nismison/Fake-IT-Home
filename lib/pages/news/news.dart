@@ -1,12 +1,15 @@
 import 'package:flutter/cupertino.dart';
 
 import '../../main.dart';
+import '../news_detail/controller.dart';
 import 'hot_comments.dart';
 import 'news_list_container.dart';
 
 class NewsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    Get.lazyPut(() => NewsDetailController());
+
     return DefaultTabController(
       length: homeTabs.length,
       child: Scaffold(
