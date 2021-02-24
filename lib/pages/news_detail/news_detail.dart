@@ -20,7 +20,7 @@ class NewsDetailPage extends GetView<NewsDetailController> {
         children: [
           const NewsTitle(),
           Obx(() {
-            if (controller.loading()) return const NewsDetailSkeleton();
+            if (controller.loading()) return const Skeleton();
 
             return Column(
               children: const [NewsContent()],

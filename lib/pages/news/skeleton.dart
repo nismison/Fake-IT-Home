@@ -3,8 +3,8 @@ import '../../main.dart';
 /*
 * 文章详情骨架屏
 * */
-class NewsDetailSkeleton extends StatelessWidget {
-  const NewsDetailSkeleton();
+class Skeleton extends StatelessWidget {
+  const Skeleton();
 
   @override
   Widget build(BuildContext context) {
