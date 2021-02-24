@@ -3,6 +3,7 @@ import 'controller.dart';
 import 'news_content.dart';
 import 'news_title.dart';
 import 'skeleton.dart';
+import 'tool_bar.dart';
 
 class NewsDetailPage extends GetView<NewsDetailController> {
   @override
@@ -29,6 +30,7 @@ class NewsDetailPage extends GetView<NewsDetailController> {
           })
         ],
       ),
+      bottomNavigationBar: const ToolBar(),
     );
   }
 }
