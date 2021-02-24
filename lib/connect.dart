@@ -73,7 +73,6 @@ class Connect extends GetConnect {
   }
 
   /// 获取热评列表
-  /// TODO: 不懂为什么获取不到数据，特么的
   Future<List<HotComment>> fetchHotCommentList() async {
     final res =
         await _request('https://cmt.ithome.com/api/comment/hotcommentlist');

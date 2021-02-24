@@ -1,5 +1,6 @@
 import '../../main.dart';
 import 'controller.dart';
+import 'editor_info.dart';
 import 'news_content.dart';
 import 'news_title.dart';
 import 'skeleton.dart';
@@ -25,7 +26,8 @@ class NewsDetailPage extends GetView<NewsDetailController> {
             if (controller.loading()) return const Skeleton();
 
             return Column(
-              children: const [NewsContent()],
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: const [NewsContent(), EditorInfo()],
             );
           })
         ],
