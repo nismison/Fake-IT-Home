@@ -2,6 +2,7 @@ import '../../main.dart';
 import 'controller.dart';
 import 'news_content.dart';
 import 'news_title.dart';
+import 'skeleton.dart';
 
 class NewsDetailPage extends GetView<NewsDetailController> {
   @override
