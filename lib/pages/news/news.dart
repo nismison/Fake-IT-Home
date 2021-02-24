@@ -38,28 +38,8 @@ class NewsPage extends StatelessWidget {
             child: Row(
               children: [
                 Expanded(
-                  child: Theme(
-                    data: ThemeData(
-                      ///默认显示的背影颜色
-                      backgroundColor: Colors.transparent,
-
-                      ///点击的高亮颜色
-                      highlightColor: Colors.transparent,
-
-                      ///水波纹颜色
-                      splashColor: Colors.transparent,
-                    ),
-                    child: TabBar(
-                      isScrollable: true,
-                      indicator: const CustomTabIndicator(
-                        borderSide: BorderSide(width: 2.5, color: Colors.red),
-                      ),
-                      indicatorColor: const Color(0xffC1352E),
-                      indicatorSize: TabBarIndicatorSize.label,
-                      labelColor: Colors.black,
-                      labelPadding: const EdgeInsets.symmetric(horizontal: 10),
-                      tabs: homeTabs.map((e) => Tab(text: e['title'])).toList(),
-                    ),
+                  child: DefaultTabBar(
+                    tabs: homeTabs.map((e) => Tab(text: e['title'])).toList(),
                   ),
                 ),
                 CupertinoButton(

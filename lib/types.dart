@@ -1,3 +1,5 @@
+import 'utils.dart';
+
 /// 首页 新闻
 class NewsList {
   final List<News> topList;
@@ -70,6 +72,7 @@ class HotCommentNews {
 class HotCommentComment {
   final String comment;
   final String username;
+  final String avatarUrl;
   final String description;
   final String phone;
   final int likeCount;
@@ -78,6 +81,7 @@ class HotCommentComment {
   HotCommentComment.fromJson(json)
       : comment = json['C'],
         username = json['N'],
+        avatarUrl = getAvatarUrlByUserId(json['Ui']),
         description = json['Y'],
         phone = json['Ta'],
         likeCount = json['S'],

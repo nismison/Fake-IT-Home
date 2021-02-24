@@ -55,6 +55,7 @@ class LapinPage extends StatelessWidget {
   }
 }
 
+/// 封装 TabBar
 class _LapinTabBar extends StatefulWidget {
   const _LapinTabBar();
 
@@ -76,21 +77,14 @@ class __LapinTabBarState extends State<_LapinTabBar>
 
   @override
   Widget build(BuildContext context) {
-    return TabBar(
-      controller: tabController,
-      isScrollable: true,
-      indicator: const CustomTabIndicator(
-        borderSide: BorderSide(width: 2.5, color: Colors.red),
-      ),
-      indicatorColor: const Color(0xffC1352E),
-      indicatorSize: TabBarIndicatorSize.label,
-      labelColor: Colors.black,
-      labelPadding: const EdgeInsets.symmetric(horizontal: 10),
+    return DefaultTabBar(
       tabs: lapinTabs.map((e) => Tab(text: e['title'])).toList(),
+      tabController: tabController,
     );
   }
 }
 
+/// 封装 TabView
 class _LapinTabView extends GetView<LapinController> {
   const _LapinTabView();
 
