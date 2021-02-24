@@ -44,8 +44,13 @@ class News {
 /// 首页 新闻 轮播图
 class NewsBanner {
   final String image;
+  final String link;
+  final int openType;
 
-  NewsBanner.fromJson(json) : image = json['image'];
+  NewsBanner.fromJson(json)
+      : image = json['image'],
+        link = json['link'],
+        openType = json['opentype'];
 }
 
 /// 热评
@@ -154,4 +159,24 @@ class ItAccountInfo {
         accountId = json['accountid'],
         accountName = json['accountname'],
         avatarUrl = json['avatarurl'];
+}
+
+/// 轮播图文章信息
+class BannerContent {
+  final String title;
+  final String newsSource;
+  final String newsAuthor;
+  final String detail;
+  final String postdate;
+  final int commentCount;
+  final String editor; // 责任编辑
+
+  BannerContent.fromJson(json)
+      : title = json['title'],
+        newsSource = json['newssource'],
+        newsAuthor = json['newsauthor'],
+        detail = json['detail'],
+        postdate = json['postdate'],
+        commentCount = json['commentcount'],
+        editor = json['z'];
 }

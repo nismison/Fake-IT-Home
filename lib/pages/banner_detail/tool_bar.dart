@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 import '../../main.dart';
 import 'controller.dart';
 
-class ToolBar extends GetView<NewsDetailController> {
+class ToolBar extends GetView<BannerDetailController> {
   const ToolBar();
 
   @override
@@ -59,9 +59,9 @@ class ToolBar extends GetView<NewsDetailController> {
                   margin: const EdgeInsets.fromLTRB(16, 0, 0, 0),
                   color: Colors.white,
                   child: Text(
-                    controller.newsInfo.commentCount > 99
+                    controller.bannerDetail.commentCount > 99
                         ? '99+'
-                        : '${controller.newsInfo.commentCount}',
+                        : '${controller.bannerDetail.commentCount}',
                     style: const TextStyle(
                       color: Color(0xffC0352C),
                       fontSize: 12,

@@ -134,6 +134,13 @@ class Connect extends GetConnect {
         await _request('https://api.ithome.com/json/newscontent/$newsId');
     return NewsDetail.fromJson(res);
   }
+
+  /// 获取轮播图文章内容
+  Future<BannerContent> fetchBannerContent(String linkId) async {
+    final res =
+        await _request('https://api.ithome.com/json/newssearch/$linkId');
+    return BannerContent.fromJson(res);
+  }
 }
 
 class RequestException implements Exception {

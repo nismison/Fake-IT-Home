@@ -31,7 +31,8 @@ class NewsContent extends GetView<NewsDetailController> {
                   'p': Style(fontSize: const FontSize(16), lineHeight: 2),
                   'span.accentTextColor': Style(
                     backgroundColor: const Color(0x22FF5252),
-                  )
+                  ),
+                  'a': Style(color: const Color(0xffC0352C))
                 },
               )
             ],

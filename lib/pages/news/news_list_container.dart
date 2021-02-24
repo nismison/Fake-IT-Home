@@ -1,3 +1,6 @@
+import 'package:fake_it_home/pages/banner_detail/controller.dart';
+import 'package:flutter/cupertino.dart';
+
 import '../../main.dart';
 import 'news_item.dart';
 import 'news_item_multiple.dart';
@@ -187,16 +190,33 @@ class BannerSwiper extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Get.lazyPut(() => BannerDetailController());
+
     return Container(
       height: 150,
       margin: const EdgeInsets.symmetric(vertical: 10),
       child: Swiper(
         itemBuilder: (context, index) {
-          return Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 15),
-            child: NetImageCache(
-              banners[index].image,
-              placeholderPath: 'assets/banner_placeholder.png',
+          return GestureDetector(
+            onTap: () {
+              String link;
+              if (banners[index].openType == 1) {
+                link = banners[index].link;
+              } else {
+                link = getBannerIdByLink(banners[index].link);
+              }
+
+              Get.find<BannerDetailController>()
+                  .fetchBannerDetail(link);
+
+              Get.to(() => BannerDetailPage());
+            },
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 15),
+              child: NetImageCache(
+                banners[index].image,
+                placeholderPath: 'assets/banner_placeholder.png',
+              ),
             ),
           );
         },

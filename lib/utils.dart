@@ -40,6 +40,15 @@ String getAvatarUrlByUserId(int userId) {
   return url;
 }
 
+/// 根据 链接 获取BannerId
+String getBannerIdByLink(String link) {
+  final a = link;
+  final b = a.split('.');
+  final c = b[b.length - 2].split('/');
+  final d = '${c[c.length - 2]}${c[c.length - 1]}';
+  return d;
+}
+
 /// 资讯首页tab
 final List<Map> homeTabs = [
   {'title': '最新', 'code': 'news'},

@@ -1,3 +1,4 @@
+export 'banner_detail/banner_detail.dart';
 export 'find/find.dart';
 export 'forum/forum.dart';
 export 'index.dart';
