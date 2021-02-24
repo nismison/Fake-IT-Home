@@ -29,6 +29,11 @@ class NewsContent extends GetView<NewsDetailController> {
                     margin: EdgeInsets.zero,
                   ),
                   'p': Style(fontSize: const FontSize(16), lineHeight: 2),
+                  'span.accentTextColor': Style(
+                    // TODO: 这个地方的背景色不对齐，留着先
+                    backgroundColor: const Color(0x22FF5252),
+                    // backgroundColor: const Color(0xffFF5252),
+                  )
                 },
               )
             ],
