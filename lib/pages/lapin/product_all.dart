@@ -152,7 +152,7 @@ class Rank extends GetView<LapinController> {
               scrollDirection: Axis.horizontal,
               itemCount: controller.homeRanks.length,
               itemBuilder: (_, index) {
-                return RankItem(controller.homeRanks[index]);
+                return RankItem(controller.homeRanks[index], index);
               },
             ),
           )
@@ -165,8 +165,9 @@ class Rank extends GetView<LapinController> {
 /// 辣榜商品
 class RankItem extends StatelessWidget {
   final LapinProduct _info;
+  final int _index;
 
-  const RankItem(this._info);
+  const RankItem(this._info, this._index);
 
   @override
   Widget build(BuildContext context) {
@@ -177,11 +178,30 @@ class RankItem extends StatelessWidget {
         width: 100,
         child: Column(
           children: [
-            NetImageCache(
-              _info.picture,
-              width: 100,
-              height: 100,
-              radius: 0,
+            Stack(
+              alignment: Alignment.topRight,
+              children: [
+                NetImageCache(
+                  _info.picture,
+                  width: 100,
+                  height: 100,
+                  radius: 0,
+                ),
+                Container(
+                  width: 17,
+                  alignment: Alignment.center,
+                  height: 20,
+                  decoration: const BoxDecoration(
+                    image: DecorationImage(
+                      image: AssetImage('assets/editor_mark.png'),
+                    ),
+                  ),
+                  child: Text(
+                    '${_index + 1}',
+                    style: const TextStyle(color: Colors.white, fontSize: 12),
+                  ),
+                )
+              ],
             ),
             const SizedBox(height: 5),
             Text(
