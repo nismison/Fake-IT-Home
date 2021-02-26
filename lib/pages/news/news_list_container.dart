@@ -87,7 +87,7 @@ class _RankTabsState extends State<RankTabs> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(vertical: 7),
+      padding: const EdgeInsets.fromLTRB(10, 15, 10, 7),
       child: Row(
         children: [
           RankTab(
