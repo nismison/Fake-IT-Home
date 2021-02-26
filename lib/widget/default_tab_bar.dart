@@ -3,14 +3,22 @@ import '../main.dart';
 class DefaultTabBar extends StatelessWidget {
   final List<Widget> tabs;
   final TabController tabController;
+  final Function(int) onSwitch;
 
   const DefaultTabBar({
     @required this.tabs,
     this.tabController,
+    this.onSwitch
   });
 
   @override
   Widget build(BuildContext context) {
+    if (onSwitch != null) {
+      tabController.addListener(() {
+        onSwitch(tabController.index);
+      });
+    }
+
     return Theme(
       data: ThemeData(
         ///默认显示的背影颜色

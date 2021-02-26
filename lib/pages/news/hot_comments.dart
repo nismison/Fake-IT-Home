@@ -1,43 +1,28 @@
 import 'package:flutter/cupertino.dart';
 
 import '../../main.dart';
+import 'controller.dart';
+import 'skeleton.dart';
 
-class HotCommentsList extends StatefulWidget {
+class HotCommentsList extends GetView<NewsListController> {
   const HotCommentsList();
 
   @override
-  _HotCommentsListState createState() => _HotCommentsListState();
-}
-
-class _HotCommentsListState extends State<HotCommentsList> {
-  List<HotComment> _hotComments;
-  bool loading = true;
-
-  @override
-  void initState() {
-    Get.find<Connect>().fetchHotCommentList().then((res) {
-      setState(() {
-        _hotComments = res;
-        loading = false;
-      });
-    });
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
-    if (loading) return const Loading();
+    return Obx(() {
+      if (controller.hotComments().isEmpty) return const Skeleton();
 
-    return Scrollbar(
-      child: ListView.builder(
-        itemCount: _hotComments.length + 1,
-        itemBuilder: (context, index) {
-          if (index == _hotComments.length) return const NoMore();
+      return Scrollbar(
+        child: ListView.builder(
+          itemCount: controller.hotComments.length + 1,
+          itemBuilder: (context, index) {
+            if (index == controller.hotComments.length) return const NoMore();
 
-          return CommentItem(_hotComments[index], index: index);
-        },
-      ),
-    );
+            return CommentItem(controller.hotComments[index], index: index);
+          },
+        ),
+      );
+    });
   }
 }
 

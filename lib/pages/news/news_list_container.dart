@@ -1,96 +1,67 @@
-import 'package:fake_it_home/pages/banner_detail/controller.dart';
 import 'package:flutter/cupertino.dart';
 
 import '../../main.dart';
+import '../banner_detail/controller.dart';
+import 'controller.dart';
 import 'news_item.dart';
 import 'news_item_multiple.dart';
+import 'skeleton.dart';
 
 class NewsListContainer extends StatefulWidget {
-  final Map tabInfo;
+  final String _code;
 
-  const NewsListContainer(this.tabInfo);
+  const NewsListContainer(this._code);
 
   @override
   _NewsListContainerState createState() => _NewsListContainerState();
 }
 
 class _NewsListContainerState extends State<NewsListContainer> {
-  List<News> newsList = [];
-  List<NewsBanner> banners;
-  bool loading = true;
-  String _code;
-  final ScrollController _scrollController = ScrollController();
-
-  @override
-  void initState() {
-    _code = widget.tabInfo['code'];
-    init();
-    super.initState();
-  }
-
-  /// 初始化数据
-  void init() async {
-    List<News> news;
-    List<NewsBanner> _banners;
-
-    /// 获取列表数据
-    if (_code == 'rank') {
-      news = await Get.find<Connect>().fetchRankList();
-    } else {
-      news = await Get.find<Connect>().fetchNews(_code);
-    }
-
-    /// 获取轮播图
-    if (_code == 'news') {
-      _banners = await Get.find<Connect>().fetchNewsBanner();
-    }
-
-    setState(() {
-      newsList = news;
-      banners = _banners;
-      loading = false;
-    });
-  }
-
-  /// 滚动列表至指定 index 项
-  void scrollTo(int index) {
-    _scrollController.animateTo(
-      (index * 12 * 105).toDouble(),
-      duration: const Duration(milliseconds: 300),
-      curve: Curves.ease,
-    );
-  }
+  final controller = Get.find<NewsListController>();
 
   @override
   Widget build(BuildContext context) {
-    if (loading) return const Loading();
+    return GetBuilder<NewsListController>(
+      id: 'news-list',
+      builder: (_) {
+        // final _code = controller.code;
+        final _code = widget._code;
+        final _codeIndex = homeTabs.indexWhere((it) => it['code'] == _code);
+        final newsList = controller.newsList[_codeIndex];
 
-    return Column(
-      children: [
-        _code == 'rank' ? RankTabs(scrollTo) : const SizedBox(),
-        Expanded(
-          child: Scrollbar(
-            child: ListView.builder(
-              controller: _scrollController,
-              itemCount: newsList.length + (_code == 'news' ? 2 : 1),
-              itemBuilder: (context, index) {
-                if ((_code == 'news' && index == newsList.length + 1) ||
-                    (_code != 'news' && index == newsList.length)) {
-                  return const NoMore();
-                }
+        if (newsList.isEmpty) return const Skeleton();
 
-                if (_code == 'rank') return NewsItem(newsList[index]);
-                if (_code == 'news' && index == 0) return BannerSwiper(banners);
+        return Column(
+          children: [
+            _code == 'rank' ? RankTabs(controller.scrollTo) : const SizedBox(),
+            Expanded(
+              child: Scrollbar(
+                child: ListView.builder(
+                  controller: controller.scrollController,
+                  itemCount: newsList.length + (_code == 'news' ? 2 : 1),
+                  itemBuilder: (context, index) {
+                    if ((_code == 'news' && index == newsList.length + 1) ||
+                        (_code != 'news' && index == newsList.length)) {
+                      return const NoMore();
+                    }
 
-                final _news = newsList[_code == 'news' ? index - 1 : index];
-                return _news.imageList.isEmpty
-                    ? NewsItem(_news)
-                    : NewsItemMultiple(_news);
-              },
+                    if (_code == 'rank') {
+                      return NewsItem(newsList[index]);
+                    } else if (_code == 'news' && index == 0) {
+                      return BannerSwiper(controller.banners);
+                    }
+
+                    final _news = newsList[_code == 'news' ? index - 1 : index];
+                    return _news.imageList.isEmpty
+                        ? NewsItem(_news)
+                        : NewsItemMultiple(_news);
+                  },
+                ),
+              ),
             ),
-          ),
-        ),
-      ],
+          ],
+        );
+      },
     );
   }
 }
@@ -206,8 +177,7 @@ class BannerSwiper extends StatelessWidget {
                 link = getBannerIdByLink(banners[index].link);
               }
 
-              Get.find<BannerDetailController>()
-                  .fetchBannerDetail(link);
+              Get.find<BannerDetailController>().fetchBannerDetail(link);
 
               Get.to(() => BannerDetailPage());
             },
