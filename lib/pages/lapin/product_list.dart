@@ -3,6 +3,7 @@ import 'controller.dart';
 import 'coupons_item.dart';
 import 'loading_tile.dart';
 import 'product_item.dart';
+import 'skeleton.dart';
 
 class ProductList extends GetView<LapinController> {
   final String _code;
@@ -17,6 +18,8 @@ class ProductList extends GetView<LapinController> {
         id: 'lapin',
         builder: (_) {
           final _productList = controller.productList[_index];
+
+          if (_productList.isEmpty) return const Skeleton();
 
           return Scrollbar(
             child: ListView.builder(

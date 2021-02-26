@@ -1,8 +1,10 @@
+import 'package:fake_it_home/pages/lapin/skeleton.dart';
 import 'package:flutter/cupertino.dart';
 
 import '../../main.dart';
 import 'controller.dart';
 import 'loading_tile.dart';
+import 'product_all_skeleton.dart';
 import 'product_item.dart';
 
 class LapinAllList extends GetView<LapinController> {
@@ -13,7 +15,7 @@ class LapinAllList extends GetView<LapinController> {
     return Obx(() {
       final _homeList = controller.homeList;
 
-      if (controller.loading()) return const Loading();
+      if (controller.loading()) return const ProductsSkeleton();
 
       return ListView.builder(
         physics: const ClampingScrollPhysics(), // 关闭滚动时回弹效果

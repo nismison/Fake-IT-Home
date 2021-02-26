@@ -1,7 +1,8 @@
 import '../../main.dart';
-import 'all.dart';
+import 'product_all.dart';
 import 'controller.dart';
 import 'product_list.dart';
+import 'skeleton.dart';
 
 class LapinPage extends StatelessWidget {
   @override
@@ -93,7 +94,7 @@ class _LapinTabView extends GetView<LapinController> {
     return GetBuilder<LapinController>(
         id: 'lapin_tab',
         builder: (_) {
-          if (controller.tabController == null) return const Loading();
+          if (controller.tabController == null) return const Skeleton();
 
           return TabBarView(
             controller: controller.tabController,
